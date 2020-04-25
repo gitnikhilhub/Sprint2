@@ -19,7 +19,7 @@ import com.cg.entity.Test;
 import com.cg.entity.User;
 import com.cg.service.OnlineTestServiceI;
 
-@CrossOrigin(origins="http://localhost:4213")
+@CrossOrigin(origins="http://localhost:4214")
 @RestController
 public class OnlineTestController {
 
