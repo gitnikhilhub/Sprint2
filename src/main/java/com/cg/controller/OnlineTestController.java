@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.entity.OptionList;
+
 import com.cg.entity.Question;
 import com.cg.entity.Test;
 import com.cg.entity.User;
@@ -27,21 +27,21 @@ public class OnlineTestController {
 	OnlineTestServiceI service;
 	
 	
-	@PostMapping(value="/user/new", consumes= {"application/json"})
-	public String createUser(@RequestBody User user)
-	{
-		service.createUser(user);
-		return "user created";
-	}
+//	@PostMapping(value="/user/new", consumes= {"application/json"})
+//	public String createUser(@RequestBody User user)
+//	{
+//		service.createUser(user);
+//		return "user created";
+//	}
+//	
 	
-	
-	@PostMapping(value="/test/new", consumes= {"application/json"})
-	public String createTest(@RequestBody Test test)
-	{
-		service.createTest(test);
-		return "test created";
-	}
-	
+//	@PostMapping(value="/test/new", consumes= {"application/json"})
+//	public String createTest(@RequestBody Test test)
+//	{
+//		service.createTest(test);
+//		return "test created";
+//	}
+//	
 	
 	@PostMapping(value="/question/new", consumes= {"application/json"})
 	public String createQuestion(@RequestBody Question question)
@@ -49,29 +49,21 @@ public class OnlineTestController {
 		service.createQuestion(question);
 		return "question created";
 	}
-	
-	
-	@PostMapping(value="/option/new", consumes= {"application/json"})
-	public String createOption(@RequestBody OptionList option)
-	{
-		service.createOption(option);
-		return "added";
-	}
 
+//	
+//	@GetMapping(value="/test")
+//	public List<Test> getTestList()
+//	{
+//		return service.getAllTest();
+//	}
 	
-	@GetMapping(value="/test")
-	public List<Test> getTestList()
-	{
-		return service.getAllTest();
-	}
 	
-	
-	@GetMapping(value="/user/{id}")
-	public User getUser(@PathVariable BigInteger id)
-	{
-		return service.getUser(id);
-	}
-
+//	@GetMapping(value="/user/{id}")
+//	public User getUser(@PathVariable BigInteger id)
+//	{
+//		return service.getUser(id);
+//	}
+//
 	
 	@GetMapping(value = "/question/{testId}")
 	public List<Question> getQuestionList(@PathVariable BigInteger testId)
@@ -92,12 +84,12 @@ public class OnlineTestController {
 		return service.getOneQuestion(questionId);
 	}
 	
-	@PutMapping(value="user/update",consumes= {"application/json"})
-	public String updateUser(@RequestBody User user)
-	{
-		return service.updateUser(user);
-	}
-	
+//	@PutMapping(value="user/update",consumes= {"application/json"})
+//	public String updateUser(@RequestBody User user)
+//	{
+//		return service.updateUser(user);
+//	}
+//	
 	
 	@PutMapping(value ="question/update", consumes= {"application/json"})
 	public String updateQuestion(@RequestBody Question question)
