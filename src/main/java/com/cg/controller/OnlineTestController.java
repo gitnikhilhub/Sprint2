@@ -4,6 +4,9 @@ import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.entity.Question;
 import com.cg.entity.Test;
 import com.cg.entity.User;
+import com.cg.exception.OnlineTestException;
 import com.cg.service.OnlineTestServiceI;
 
 @CrossOrigin(origins="http://localhost:4214")
@@ -44,12 +48,30 @@ public class OnlineTestController {
 //	
 	
 	@PostMapping(value="/question/new", consumes= {"application/json"})
-	public String createQuestion(@RequestBody Question question)
+	public String createQuestion(@RequestBody Question question,BindingResult bindingResult)  throws OnlineTestException
 	{
+		String err="";
+		if(bindingResult.hasErrors())
+		{
+			List<FieldError> errors=bindingResult.getFieldErrors();
+			for(FieldError error:errors)
+			{
+				err +=error.getDefaultMessage();
+			}
+			throw new OnlineTestException(err);
+		}
+	
+	
+	
+	try{
 		service.createQuestion(question);
 		return "question created";
 	}
-
+	catch(DataIntegrityViolationException exception)
+	{
+		throw new OnlineTestException("id already exists");
+	}
+ }
 //	
 //	@GetMapping(value="/test")
 //	public List<Test> getTestList()
