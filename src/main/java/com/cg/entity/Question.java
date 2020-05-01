@@ -22,9 +22,7 @@ public class Question implements Serializable{
 	@Id
 	private BigInteger questionId ; 
 
-//	@OneToOne(fetch = FetchType.LAZY, targetEntity = OptionList.class, cascade=CascadeType.ALL)
-//	@JoinColumn(name="optionId", insertable = false, updatable = false)
-//    private OptionList option;
+
 	
 	@Column(name = "options")
 	private String[] option;
