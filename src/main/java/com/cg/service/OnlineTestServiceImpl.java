@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.cg.dao.OnlineTestDaoI;
 import com.cg.entity.Question;
+import com.cg.entity.Result;
 import com.cg.entity.Test;
 import com.cg.entity.User;
 
@@ -51,6 +52,16 @@ public class OnlineTestServiceImpl implements OnlineTestServiceI {
 	public void deleteQuestion(BigInteger questionId) {
 		dao.deleteQuestion(questionId);
 		
+	}
+	@Override
+	public List<Result> getResult(int userId)
+	{
+	   return dao.getResult(userId);
+	}	
+	@Override
+	public void createResult(Result result) {
+		
+		dao.createResult(result);
 	}
 
 	

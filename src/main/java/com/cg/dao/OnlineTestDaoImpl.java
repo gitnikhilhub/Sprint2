@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.cg.entity.Question;
+import com.cg.entity.Result;
 import com.cg.entity.Test;
 import com.cg.entity.User;
 
@@ -73,7 +74,16 @@ public class OnlineTestDaoImpl implements OnlineTestDaoI {
 		Question question = manager.find(Question.class, questionId);
 		manager.remove(question);
 	}
+	@Override
+	public List<Result> getResult(int userId)
+{
+     Query query  = manager.createQuery("from Result r where r.userId = "+userId);
+     return query.getResultList();
+}
+	@Override
+	public void createResult(Result result) {
+		
+		manager.persist(result);
+	}
 
-	
-	
 }
