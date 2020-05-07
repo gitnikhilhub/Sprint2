@@ -4,9 +4,6 @@ import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,51 +29,18 @@ public class OnlineTestController {
 	OnlineTestServiceI service;
 	
 	@PostMapping(value="/question/new", consumes= {"application/json"})
-	public String createQuestion(@RequestBody Question question,BindingResult bindingResult)  throws OnlineTestException
+	public String createQuestion(@RequestBody Question question) 
 	{
-		String err="";
-		if(bindingResult.hasErrors())
-		{
-			List<FieldError> errors=bindingResult.getFieldErrors();
-			for(FieldError error:errors)
-			{
-				err +=error.getDefaultMessage();
-			}
-			throw new OnlineTestException(err);
-		}
-	
-	
-	
-	try{
 		service.createQuestion(question);
 		return "question created";
+	
 	}
-	catch(DataIntegrityViolationException exception)
-	{
-		throw new OnlineTestException("id already exists");
-	}
- }
 
-	
-	@GetMapping(value = "/question/{testId}")
-	public List<Question> getQuestionList(@PathVariable BigInteger testId)
-	{
-		return service.getQuestionList(testId);
-	}
-	
 	@GetMapping(value = "/question")
 	public List<Question> getAllQuestion()
 	{
 		return service.getAllQuestion();
 	}
-	
-	
-	@GetMapping(value = "/question/{questionId}")
-	public Question getOneQuestion(@PathVariable BigInteger questionId)
-	{
-		return service.getOneQuestion(questionId);
-	}
-
 	
 	@PutMapping(value ="question/update", consumes= {"application/json"})
 	public String updateQuestion(@RequestBody Question question)
@@ -97,10 +61,16 @@ public class OnlineTestController {
 	{
 	return service.getResult(userId);
 	}
-	@PostMapping(value = "/result/new", consumes = {"application/json"})
-	public String createResult(@RequestBody Result result)
+	@PostMapping(value="/user/new", consumes= {"application/json"})
+	public String createUser(@RequestBody User user) 
 	{
-		service.createResult(result);
-		return "result created";
+		service.createUser(user);
+		return "question created";
 	}
+	@GetMapping(value ="/user/{id}")
+	public User getUser(@PathVariable BigInteger id)
+	{
+	return service.getUser(id);
+	}
+
 }

@@ -16,38 +16,33 @@ import com.cg.entity.Result;
 import com.cg.entity.Test;
 import com.cg.entity.User;
 
-@Repository
+@Repository 
+
+/*@Repository annotation is used to indicate that the class provides the mechanism 
+      for storage, retrieval, search, update and delete operation on objects.*/
+
 @Transactional
+
+
 public class OnlineTestDaoImpl implements OnlineTestDaoI {
 
 	@PersistenceContext
-	EntityManager manager;
+	
+	/*	The @PersistenceContext annotation in your code is being used 
+	to indicate that the EntityManager must be automatically injected.*/
+	
+	EntityManager manager;  //entity manager can manage your entities. Entity Manager handles all interactions with the database
 
 	@Override
 	public void createQuestion(Question question) {
-		manager.persist(question);
+		manager.persist(question); 
+		//The persist method is intended for adding a new entity instance to the persistence context,
 	}
-
-
-	@Override
-	public List<Question> getQuestionList(BigInteger testId) {
-		// TODO Auto-generated method stub
-		Query query = manager.createQuery("from Question que where test_fk ="+testId);
-		return query.getResultList();
-	}
-
-	
 	@Override
 	public List<Question> getAllQuestion() {
 
         Query query = manager.createQuery("from Question que");
 		return query.getResultList();
-	}
-
-	@Override
-	public Question getOneQuestion(BigInteger questionId) {
-		
-		return manager.find(Question.class, questionId);
 	}
 
 	@Override
@@ -81,9 +76,13 @@ public class OnlineTestDaoImpl implements OnlineTestDaoI {
      return query.getResultList();
 }
 	@Override
-	public void createResult(Result result) {
-		
-		manager.persist(result);
-	}
-
+	public void createUser(User user) {
+		manager.persist(user); 
 }
+	@Override
+	public User getUser(BigInteger id) {
+	User user1 = manager.find(User.class, id);
+	return user1;
+	}
+	
+}	

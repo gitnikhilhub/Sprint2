@@ -14,11 +14,10 @@ public interface OnlineTestDaoI {
 
 	public void createQuestion(Question question);
 	public void updateQuestion(Question question);
-	public List<Question> getQuestionList(BigInteger testId);
 	public List<Question> getAllQuestion();
-	public Question getOneQuestion(BigInteger questionId);
 	public void deleteQuestion(BigInteger questionId);
 	public List<Result> getResult(int userId);
-	public void createResult(Result result);
+	public	void createUser(User user);
+	public User getUser(BigInteger id);
 	
 }

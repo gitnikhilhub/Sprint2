@@ -15,23 +15,25 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="question")
+@Entity                  //it is useful with model classes to denote that this is the entity or table
+
+@Table(name="question")  //this name will be used to name a table in DataBase
 public class Question implements Serializable{
 
-	@Id
-	private BigInteger questionId ; 
+	@Id                //it denotes primary key of the  table which is created
+	private BigInteger questionId ;   
 
 
 	
-	@Column(name = "options")
+	@Column(name = "options")    //it is used to create column in the database
 	private String[] option;
 
 	@Column
 	private String questionTitle ;
 	
 	@Column
-	private Integer questionAnswer ;
+	private String questionAnswer ;
+
 	
 	@Column
 	private BigDecimal questionMarks ;
@@ -40,7 +42,10 @@ public class Question implements Serializable{
 	private Integer chosenAnswer ;
 	
 	@Column
-	private BigDecimal marksScored ; 
+	private BigDecimal marksScored ;
+	
+	
+	
 
 	
 	public Question()
@@ -50,7 +55,7 @@ public class Question implements Serializable{
 
 
 	public Question(BigInteger questionId, String questionTitle,
-			Integer questionAnswer, BigDecimal questionMarks, Integer chosenAnswer, BigDecimal marksScored) {
+			String questionAnswer, BigDecimal questionMarks, Integer chosenAnswer, BigDecimal marksScored) {
 		super();
 		this.questionId = questionId;
 		this.questionTitle = questionTitle;
@@ -91,12 +96,12 @@ public class Question implements Serializable{
 	}
 
 
-	public Integer getQuestionAnswer() {
+	public String getQuestionAnswer() {
 		return questionAnswer;
 	}
 
 
-	public void setQuestionAnswer(Integer questionAnswer) {
+	public void setQuestionAnswer(String questionAnswer) {
 		this.questionAnswer = questionAnswer;
 	}
 
@@ -131,15 +136,6 @@ public class Question implements Serializable{
 	}
 
 	
-
-//	public OptionList getOption() {
-//		return option;
-//	}
-//
-//
-//	public void setOption(OptionList option) {
-//		this.option = option;
-//	}
 
 
 	@Override

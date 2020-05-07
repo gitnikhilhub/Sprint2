@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.cg.dao.OnlineTestDaoI;
@@ -11,6 +12,7 @@ import com.cg.entity.Question;
 import com.cg.entity.Result;
 import com.cg.entity.Test;
 import com.cg.entity.User;
+import com.cg.exception.OnlineTestException;
 
 @Service
 public class OnlineTestServiceImpl implements OnlineTestServiceI {
@@ -19,16 +21,17 @@ public class OnlineTestServiceImpl implements OnlineTestServiceI {
 	OnlineTestDaoI dao;
 
 	@Override
-	public void createQuestion(Question question) {
-		dao.createQuestion(question);
+	public void createQuestion(Question question) throws OnlineTestException {
+		try{
+			dao.createQuestion(question);
+			}
+		catch(DataIntegrityViolationException exception)
+		{
+			throw new OnlineTestException("question with this id already exists");
+		}
 	}
 
 
-	@Override
-	public List<Question> getQuestionList(BigInteger testId) {
-		
-		return dao.getQuestionList(testId);
-	}
 
 	@Override
 	public List<Question> getAllQuestion() {
@@ -36,11 +39,7 @@ public class OnlineTestServiceImpl implements OnlineTestServiceI {
 		return dao.getAllQuestion();
 	}
 
-	@Override
-	public Question getOneQuestion(BigInteger questionId) {
-		
-		return dao.getOneQuestion(questionId);
-	}
+
 
 	@Override
 	public void updateQuestion(Question question) {
@@ -58,11 +57,32 @@ public class OnlineTestServiceImpl implements OnlineTestServiceI {
 	{
 	   return dao.getResult(userId);
 	}	
+	
 	@Override
-	public void createResult(Result result) {
-		
-		dao.createResult(result);
+	public void createUser(User user) throws OnlineTestException {
+		try{
+			dao.createUser(user);
+			}
+		catch(DataIntegrityViolationException exception)
+		{
+			throw new OnlineTestException("id already present");
+		}
 	}
-
+	
+	@Override
+	public User getUser(BigInteger id) throws OnlineTestException 
+	{
+		User user=dao.getUser(id);
+		if(user!=null)
+		{
+			return dao.getUser(id);
+		}
+		else
+		{
+			throw new OnlineTestException("No user exists");
+		}
+	}
+	
+	
 	
 }

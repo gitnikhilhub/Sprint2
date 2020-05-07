@@ -31,10 +31,6 @@ public class Test {
 	@Column
 	private int testMarksScored ;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "questionId")
-	private Question currentQuestion ;
-	
 	@Column
 	private String startTime ; 
 	
@@ -91,14 +87,7 @@ public class Test {
 	}
 
 
-//	public Set<Question> getTestQuestions() {
-//		return testQuestions;
-//	}
-//
-//
-//	public void setTestQuestions(Set<Question> testQuestions) {
-//		this.testQuestions = testQuestions;
-//	}
+
 
 
 	public int getTestTotalMarks() {
@@ -121,14 +110,7 @@ public class Test {
 	}
 
 
-	public Question getCurrentQuestion() {
-		return currentQuestion;
-	}
-
-
-	public void setCurrentQuestion(Question currentQuestion) {
-		this.currentQuestion = currentQuestion;
-	}
+	
 
 
 	public String getStartTime() {

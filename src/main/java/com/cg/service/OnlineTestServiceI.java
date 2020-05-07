@@ -6,16 +6,17 @@ import com.cg.entity.Question;
 import com.cg.entity.Result;
 import com.cg.entity.Test;
 import com.cg.entity.User;
+import com.cg.exception.OnlineTestException;
 
 public interface OnlineTestServiceI {
 
 
 	public void createQuestion(Question question);
     public void updateQuestion(Question question);
-	public List<Question> getQuestionList(BigInteger testId);
 	public List<Question> getAllQuestion();
-	public Question getOneQuestion(BigInteger questionId);
 	public void deleteQuestion(BigInteger questionId);
 	public List<Result> getResult(int userId);
-	public void createResult(Result result);
+	public void createUser(User user);
+	public User getUser(BigInteger id);
+
 }

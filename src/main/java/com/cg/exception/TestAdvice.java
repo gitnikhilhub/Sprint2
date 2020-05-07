@@ -10,9 +10,9 @@ public class TestAdvice {
 
 	@ExceptionHandler(value = { OnlineTestException.class })
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
-	public ErrorInfo handleException(Exception ex)
+	public ErrorInfo handleException(Exception exception)
 	{
-		return new ErrorInfo(ex.getMessage());
+		return new ErrorInfo(exception.getMessage());
 	}
 	
 }
