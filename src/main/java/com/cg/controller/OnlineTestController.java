@@ -33,7 +33,6 @@ public class OnlineTestController {
 	{
 		service.createQuestion(question);
 		return "question created";
-	
 	}
 
 	@GetMapping(value = "/question")
@@ -49,24 +48,26 @@ public class OnlineTestController {
 		return "question updated";
 	}
 	
-	
 	@DeleteMapping(value = "question/delete/{questionId}")
 	public String deleteQuestion(@PathVariable BigInteger questionId)
 	{
 		service.deleteQuestion(questionId);
 		return "deleted";
 	}
+	
 	@GetMapping(value ="/result/{userId}")
 	public List<Result> getResult(@PathVariable int userId)
 	{
 	return service.getResult(userId);
 	}
+	
 	@PostMapping(value="/user/new", consumes= {"application/json"})
 	public String createUser(@RequestBody User user) 
 	{
 		service.createUser(user);
-		return "question created";
+		return "user created";
 	}
+	
 	@GetMapping(value ="/user/{id}")
 	public User getUser(@PathVariable BigInteger id)
 	{
